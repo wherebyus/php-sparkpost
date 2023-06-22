@@ -16,7 +16,7 @@ class SparkPostResponse
     /**
      * Array with the request values sent.
      */
-    private array $request;
+    private ?array $request;
 
     public function __construct(ResponseInterface $response, ?array $request = null)
     {
