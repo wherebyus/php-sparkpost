@@ -13,7 +13,7 @@
     "fix-style": "php-cs-fixer fix ."
   },
   "require": {
-    "php": "^7.1 || ^8.0",
+    "php": "^8.2",
     "php-http/httplug": "^1.0 || ^2.0",
     "php-http/message": "^1.0",
     "php-http/client-implementation": "^1.0",
