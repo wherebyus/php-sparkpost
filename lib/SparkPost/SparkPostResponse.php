@@ -2,6 +2,7 @@
 
 namespace SparkPost;
 
+use Psr\Http\Message\MessageInterface;
 use Psr\Http\Message\ResponseInterface as ResponseInterface;
 use Psr\Http\Message\StreamInterface as StreamInterface;
 
@@ -17,34 +18,18 @@ class SparkPostResponse implements ResponseInterface
      */
     private array $request;
 
-    /**
-     * set the response to be wrapped.
-     *
-     * @param ResponseInterface $response
-     * @param array|null $request
-     */
     public function __construct(ResponseInterface $response, ?array $request = null)
     {
         $this->response = $response;
         $this->request = $request;
     }
 
-    /**
-     * Returns the request values sent.
-     *
-     * @return array|null $request
-     */
     public function getRequest(): ?array
     {
         return $this->request;
     }
 
-    /**
-     * Returns the body.
-     *
-     * @return array $body - the json decoded body from the http response
-     */
-    public function getBody(): array
+    public function getBody(): StreamInterface
     {
         $body = $this->response->getBody();
         $body_string = $body->__toString();
@@ -52,15 +37,12 @@ class SparkPostResponse implements ResponseInterface
         return json_decode($body_string, true);
     }
 
-    /**
-     * pass these down to the response given in the constructor.
-     */
     public function getProtocolVersion(): string
     {
         return $this->response->getProtocolVersion();
     }
 
-    public function withProtocolVersion($version): SparkPostResponse|ResponseInterface
+    public function withProtocolVersion($version): MessageInterface
     {
         return $this->response->withProtocolVersion($version);
     }
@@ -85,22 +67,22 @@ class SparkPostResponse implements ResponseInterface
         return $this->response->getHeaderLine($name);
     }
 
-    public function withHeader($name, $value): SparkPostResponse|ResponseInterface
+    public function withHeader($name, $value): MessageInterface
     {
         return $this->response->withHeader($name, $value);
     }
 
-    public function withAddedHeader($name, $value): SparkPostResponse|ResponseInterface
+    public function withAddedHeader($name, $value): MessageInterface
     {
         return $this->response->withAddedHeader($name, $value);
     }
 
-    public function withoutHeader($name): SparkPostResponse|ResponseInterface
+    public function withoutHeader($name): MessageInterface
     {
         return $this->response->withoutHeader($name);
     }
 
-    public function withBody(StreamInterface $body): SparkPostResponse|ResponseInterface
+    public function withBody(StreamInterface $body): MessageInterface
     {
         return $this->response->withBody($body);
     }
@@ -110,7 +92,7 @@ class SparkPostResponse implements ResponseInterface
         return $this->response->getStatusCode();
     }
 
-    public function withStatus($code, $reasonPhrase = ''): SparkPostResponse|ResponseInterface
+    public function withStatus($code, $reasonPhrase = ''): MessageInterface
     {
         return $this->response->withStatus($code, $reasonPhrase);
     }
