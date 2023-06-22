@@ -42,7 +42,7 @@ class SparkPostResponse implements ResponseInterface
         return $this->response->getProtocolVersion();
     }
 
-    public function withProtocolVersion($version): MessageInterface
+    public function withProtocolVersion(string $version): MessageInterface
     {
         return $this->response->withProtocolVersion($version);
     }
@@ -52,32 +52,32 @@ class SparkPostResponse implements ResponseInterface
         return $this->response->getHeaders();
     }
 
-    public function hasHeader($name): bool
+    public function hasHeader(string $name): bool
     {
         return $this->response->hasHeader($name);
     }
 
-    public function getHeader($name): array
+    public function getHeader(string $name): array
     {
         return $this->response->getHeader($name);
     }
 
-    public function getHeaderLine($name): string
+    public function getHeaderLine(string $name): string
     {
         return $this->response->getHeaderLine($name);
     }
 
-    public function withHeader($name, $value): MessageInterface
+    public function withHeader(string $name, $value): MessageInterface
     {
         return $this->response->withHeader($name, $value);
     }
 
-    public function withAddedHeader($name, $value): MessageInterface
+    public function withAddedHeader(string $name, $value): MessageInterface
     {
         return $this->response->withAddedHeader($name, $value);
     }
 
-    public function withoutHeader($name): MessageInterface
+    public function withoutHeader(string $name): MessageInterface
     {
         return $this->response->withoutHeader($name);
     }
@@ -92,7 +92,7 @@ class SparkPostResponse implements ResponseInterface
         return $this->response->getStatusCode();
     }
 
-    public function withStatus($code, $reasonPhrase = ''): MessageInterface
+    public function withStatus(int $code, string $reasonPhrase = ''): ResponseInterface
     {
         return $this->response->withStatus($code, $reasonPhrase);
     }
