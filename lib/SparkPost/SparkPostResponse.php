@@ -6,7 +6,7 @@ use Psr\Http\Message\MessageInterface;
 use Psr\Http\Message\ResponseInterface as ResponseInterface;
 use Psr\Http\Message\StreamInterface as StreamInterface;
 
-class SparkPostResponse implements ResponseInterface
+class SparkPostResponse
 {
     /**
      * ResponseInterface to be wrapped by SparkPostResponse.
@@ -29,7 +29,10 @@ class SparkPostResponse implements ResponseInterface
         return $this->request;
     }
 
-    public function getBody(): StreamInterface
+    /**
+     * @return StreamInterface|array
+     */
+    public function getBody(): mixed
     {
         $body = $this->response->getBody();
         $body_string = $body->__toString();
